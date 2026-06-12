@@ -1,24 +1,30 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/estilo.css">
-    
-    <title>Elevador SESI</title>
-    
+    <title>Elevador de Carga - SESI</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="painel">
-         <h1>SESI Elevador</h1>
 
-         <div id="status-luz"> SISTEMA OK</div>
-         <p> Carga Atual: <span id="peso-visor">0</span>kg</p>
-         <button onclick="adicionarCarga(100)">Adicionar 100kg</button>
-         <button onclick="LimparCarga()">Resetar Sistema</button>
+    <div class="painel-carga">
+        <h2>Indicador de Carga</h2>
+        <p class="info-limite">Capacidade Máxima: 300 kg</p>
+        
+        <div id="visor-container" class="visor-container">
+            <div id="peso-texto" class="peso-digital">0 kg</div>
+            <div id="status-texto" class="status-normal">SISTEMA LIBERADO</div>
+        </div>
+
+        <div class="botoes-controle">
+            <button onclick="mudarPeso(50)" class="btn btn-add">+50 kg</button>
+            <button onclick="mudarPeso(100)" class="btn btn-add">+100 kg</button>
+            <button onclick="mudarPeso(-50)" class="btn btn-sub">-50 kg</button>
+            <button onclick="limparCarga()" class="btn btn-reset">Zerar</button>
+        </div>
     </div>
 
-    <script src="/script.js"></script>
-
+    <script src="script.js"></script>
 </body>
 </html>
