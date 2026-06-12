@@ -1,21 +1,37 @@
-let cargaTotal = 0;
+let pesoAtual = 0;
+const limiteCarga = 300;
 
-function adicionarCarga(quantidade) {
-  const visor = document.querySelector("#peso-visor");
-  const statusluz = document.querySelector("#status-luz");
-  cargaTotal += quantidade;
-  visor.textContent = cargaTotal;
+const pesoTexto = document.getElementById('peso-texto');
+const statusTexto = document.getElementById('status-texto');
+const visorContainer = document.getElementById('visor-container');
 
-  if (cargaTotal > 300) {
-    statusluz.textContent = "ALERTA: SOBRECARGA!";
-    statusluz.classList.add("alerta-perigo");
-  }
+function mudarPeso(valor) {
+    // Impede que o peso fique abaixo de zero
+    if (pesoAtual + valor < 0) {
+        pesoAtual = 0;
+    } else {
+        pesoAtual += valor;
+    }
+    verificarCarga();
 }
-function LimparCarga() {
-  const visor = document.querySelector("#peso-visor");
-  const statusluz = document.querySelector("#status-luz");
-  cargaTotal = 0;
-  visor.textContent = cargaTotal;
-  statusluz.textContent = "SISTEMA OK";
-  statusluz.classList.remove("alerta-perigo");
+
+function limparCarga() {
+    pesoAtual = 0;
+    verificarCarga();
+}
+
+function verificarCarga() {
+    // Atualiza o número no visor
+    pesoTexto.innerText = `${pesoAtual} kg`;
+
+    // Lógica do alarme (se passar de 300 kg)
+    if (pesoAtual > limiteCarga) {
+        visorContainer.classList.add('sobrecarga');
+        statusTexto.innerText = "ALERTA: EXCESSO DE CARGA!";
+        statusTexto.className = ""; // limpa classe anterior
+    } else {
+        visorContainer.classList.remove('sobrecarga');
+        statusTexto.innerText = "SISTEMA LIBERADO";
+        statusTexto.className = "status-normal";
+    }
 }
